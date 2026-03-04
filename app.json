@@ -22,11 +22,9 @@
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "android.permission.RECORD_AUDIO",
-        "android.permission.MODIFY_AUDIO_SETTINGS",
-        "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
-      "package": "com.jaelee0409.interclear"
+      "package": "com.binaryterrier.interclear"
     },
     "web": {
       "output": "static",
@@ -51,6 +49,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "171abb4a-60a8-4e6b-b0d9-98775213ff11"
+      }
     }
   }
 }
