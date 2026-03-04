@@ -50,7 +50,7 @@ export const useSettingsStore = create<SettingsState & SettingsActions>()(
       setOnboardingComplete: (onboardingComplete) => set({ onboardingComplete }),
     }),
     {
-      name: '@interviewlab:settings',
+      name: '@interclear:settings',
       storage: createJSONStorage(() => AsyncStorage),
     },
   ),

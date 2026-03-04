@@ -4,7 +4,7 @@
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const PREFIX = '@interviewlab:';
+const PREFIX = '@interclear:';
 
 function key(k: string) {
   return `${PREFIX}${k}`;

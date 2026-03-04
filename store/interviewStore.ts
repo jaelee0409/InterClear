@@ -112,7 +112,7 @@ export const useInterviewStore = create<InterviewState & InterviewActions>()(
         clearHistory: () => set({ recentSessions: [] }),
       }),
       {
-        name: '@interviewlab:sessions',
+        name: '@interclear:sessions',
         storage: createJSONStorage(() => AsyncStorage),
         // Only persist recentSessions — currentSession is always transient
         partialize: (state) => ({ recentSessions: state.recentSessions }),
