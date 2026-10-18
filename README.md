@@ -14,9 +14,9 @@ Built in March 2026 with AI assistance: 3 of the 4 commits carry a `Co-Authored-
 
 ## Stack
 
-- **App:** React Native 0.81, Expo 54 (Expo Router), Zustand, AsyncStorage
-- **Backend:** Node.js, Express, multer, OpenAI API
-- **Data and auth:** Supabase
+- App: React Native 0.81, Expo 54 (Expo Router), Zustand, AsyncStorage
+- Backend: Node.js, Express, multer, OpenAI API
+- Data and auth: Supabase
 
 ## Structure
 
