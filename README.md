@@ -1,50 +1,47 @@
-# Welcome to your Expo app 👋
+# InterClear (인터클리어)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+An AI interview-practice app for Korean job seekers. Pick a field, hear each question read aloud, answer by voice, and get structured feedback.
 
-## Get started
+Built in March 2026 with AI assistance: 3 of the 4 commits carry a `Co-Authored-By: Claude Sonnet 4.6` trailer, including the main "launch InterClear v1.0.0" MVP scaffold.
 
-1. Install dependencies
+## How it works
 
-   ```bash
-   npm install
-   ```
+1. Pick a field. The app reads a question aloud with text-to-speech (`expo-speech`).
+2. Answer by voice. The app records the answer (`expo-audio`) and uploads it to the backend.
+3. The Express backend transcribes the recording with OpenAI `whisper-1`.
+4. `gpt-4o` returns JSON feedback: an overall score (0–100) and five scored dimensions, each with a comment (structure, including use of STAR; logic; tone; confidence; relevance), plus strengths, improvements, and a model answer.
+5. Sessions are kept on the device (Zustand + AsyncStorage) and synced to Supabase, which also handles sign-in and holds the question bank.
 
-2. Start the app
+## Stack
 
-   ```bash
-   npx expo start
-   ```
+- **App:** React Native 0.81, Expo 54 (Expo Router), Zustand, AsyncStorage
+- **Backend:** Node.js, Express, multer, OpenAI API
+- **Data and auth:** Supabase
 
-In the output, you'll find options to open the app in a
+## Structure
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/        screens (Expo Router): onboarding, (auth), (tabs), interview, legal
+backend/    Express API: /api/sessions, /api/categories; OpenAI calls in src/services/openai.ts
+supabase/   seed_questions.sql (question bank)
+domain/     shared types, such as the feedback dimensions
+services/   API clients used by the app
+store/      Zustand stores (auth, interview, settings)
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Run locally
 
-## Learn more
+Backend: create `backend/.env` with `OPENAI_API_KEY`, `SUPABASE_URL`, and `SUPABASE_SERVICE_ROLE_KEY` (optional: `PORT`, default 3001, and `ALLOWED_ORIGINS`).
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+App: create `.env` with `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_SUPABASE_URL`, and `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. In development the app uses built-in sample questions unless `EXPO_PUBLIC_MOCK_DATA=false`.
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npm install
+npx expo start
+```
